@@ -4,6 +4,8 @@ import fastifyJwt from "@fastify/jwt";
 import type { FastifyInstance } from "fastify";
 
 export async function registerAuthPlugins(app: FastifyInstance) {
+	// Register JWT authentication
+	// This will allow you to use JWT tokens for authentication
 	await app.register(fastifyJwt, {
 		secret: env.JWT_SECRET,
 		cookie: {
@@ -15,5 +17,7 @@ export async function registerAuthPlugins(app: FastifyInstance) {
 		},
 	});
 
+	// Register cookie support
+	// This will allow you to use cookies for authentication
 	await app.register(fastifyCookie);
 }
