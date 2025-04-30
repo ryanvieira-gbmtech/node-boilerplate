@@ -10,6 +10,7 @@ const EnvSchema = Type.Object({
 	DATABASE_URL: Type.String({ pattern: "^postgres://.*" }),
 	TZ: Type.String({ default: "UTC" }),
 	PORT: Type.Number({ default: 3000 }),
+	JWT_SECRET: Type.String(),
 });
 
 export const env = Value.Parse(EnvSchema, process.env);
