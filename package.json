@@ -25,6 +25,7 @@
 		"@types/node": "22.15.3",
 		"kanel": "3.13.0",
 		"kanel-kysely": "0.7.1",
+		"kysely-ctl": "0.12.2",
 		"lefthook": "1.11.12",
 		"typescript": "5.8.3"
 	},
