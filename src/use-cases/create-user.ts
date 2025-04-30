@@ -1,5 +1,6 @@
 import type { UserRepository } from "@/repositories/user.repository";
 import bcryptjs from "bcryptjs";
+import { UserAlreadyExistsError } from "./errors/user-already-exists-error";
 
 interface CreateUserInput {
 	name: string;
@@ -12,6 +13,12 @@ export class CreateUserUseCase {
 
 	async execute(filter: CreateUserInput) {
 		const { name, email, password } = filter;
+
+		const userExists = await this.userRepository.findByEmail(email);
+
+		if (userExists) {
+			throw new UserAlreadyExistsError();
+		}
 
 		const salt = await bcryptjs.genSalt(10);
 		const newPassword = await bcryptjs.hash(password, salt);
