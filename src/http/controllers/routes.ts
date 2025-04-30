@@ -1,6 +1,7 @@
 import type { FastifyInstance } from "fastify";
-import { SignInRequest } from "./dto/request";
-import { SignInResponse } from "./dto/response";
+import { createUser } from "./create-user";
+import { CreateUserRequest, SignInRequest } from "./dto/request";
+import { CreateUserResponse, SignInResponse } from "./dto/response";
 import { signIn } from "./sign-in";
 
 export async function routes(app: FastifyInstance) {
@@ -16,5 +17,19 @@ export async function routes(app: FastifyInstance) {
 			},
 		},
 		signIn,
+	);
+
+	app.post(
+		"/users",
+		{
+			schema: {
+				tags: ["Users"],
+				body: CreateUserRequest,
+				response: {
+					201: CreateUserResponse,
+				},
+			},
+		},
+		createUser,
 	);
 }
