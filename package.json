@@ -19,5 +19,8 @@
   "homepage": "https://github.com/rhyzzor/node-boilerplate#readme",
   "volta": {
     "node": "22.15.0"
+  },
+  "devDependencies": {
+    "typescript": "5.8.3"
   }
 }
