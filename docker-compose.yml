@@ -1,0 +1,16 @@
+networks: 
+  node-boilerplate:
+    driver: bridge
+
+services:
+  postgresql:
+    image: 'bitnami/postgresql:latest'
+    networks:
+      - node-boilerplate
+    container_name: node-boilerplate-postgresql
+    environment:
+      - POSTGRESQL_USERNAME=docker
+      - POSTGRESQL_PASSWORD=docker
+      - POSTGRESQL_DATABASE=node-boilerplate
+    ports:
+      - '5432:5432'
