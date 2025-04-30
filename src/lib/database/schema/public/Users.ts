@@ -10,11 +10,11 @@ export type UsersId = number & { __brand: "public.users" };
 export default interface UsersTable {
 	id: ColumnType<UsersId, UsersId | undefined, UsersId>;
 
-	name: ColumnType<string | null, string | null, string | null>;
+	name: ColumnType<string, string, string>;
 
-	email: ColumnType<string | null, string | null, string | null>;
+	email: ColumnType<string, string, string>;
 
-	password: ColumnType<string | null, string | null, string | null>;
+	password: ColumnType<string, string, string>;
 
 	createdAt: ColumnType<Date, Date | string | undefined, Date | string>;
 
