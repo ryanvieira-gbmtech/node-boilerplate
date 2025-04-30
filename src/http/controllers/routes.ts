@@ -8,6 +8,7 @@ export async function routes(app: FastifyInstance) {
 		"/sign-in",
 		{
 			schema: {
+				tags: ["Auth"],
 				body: SignInRequest,
 				response: {
 					201: SignInResponse,
