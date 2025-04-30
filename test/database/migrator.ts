@@ -52,5 +52,5 @@ async function migrate(url: URL, schema: string) {
 	}
 
 	await db.destroy();
-	await sql.raw(`SET search_path TO ${schema}`).execute(kyselyInstance);
+	await sql.raw(`SET search_path TO '${schema}'`).execute(kyselyInstance);
 }
