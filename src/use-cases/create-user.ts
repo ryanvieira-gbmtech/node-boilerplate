@@ -28,14 +28,14 @@ export class CreateUserUseCase {
 		const salt = await bcryptjs.genSalt(10);
 		const newPassword = await bcryptjs.hash(password, salt);
 
-		const { password: _, ...newUser } = await this.userRepository.create({
+		const user = await this.userRepository.create({
 			name,
 			email,
 			password: newPassword,
 		});
 
 		return {
-			user: newUser,
+			user,
 		};
 	}
 }
