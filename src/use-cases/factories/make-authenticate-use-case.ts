@@ -1,7 +1,7 @@
 import { UserRepository } from "@/repositories/user.repository";
-import { GetUserProfileUseCase } from "../get-user-profile";
+import { AuthenticateUseCase } from "../authenticate";
 
-export function makeGetUserProfileUseCase() {
+export function makeAuthenticateUseCase() {
 	const userRepository = new UserRepository();
-	return new GetUserProfileUseCase(userRepository);
+	return new AuthenticateUseCase(userRepository);
 }
