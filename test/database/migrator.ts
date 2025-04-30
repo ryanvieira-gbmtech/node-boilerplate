@@ -1,8 +1,9 @@
 import "dotenv/config";
 import { promises as fs } from "node:fs";
 import path from "node:path";
-import { FileMigrationProvider, Kysely, Migrator, PostgresDialect } from "kysely";
+import { FileMigrationProvider, Kysely, Migrator, PostgresDialect, sql } from "kysely";
 import { Pool } from "pg";
+import { db as kyselyInstance } from "../../src/lib/database/kysely";
 
 export async function changeDatabaseURL(schema: string) {
 	if (!process.env.DATABASE_URL) {
@@ -44,4 +45,7 @@ async function migrate(url: URL, schema: string) {
 		console.error("Migration error:", error);
 		process.exit(1);
 	}
+
+	await db.destroy();
+	await sql.raw(`SET search_path TO ${schema}`).execute(kyselyInstance);
 }
