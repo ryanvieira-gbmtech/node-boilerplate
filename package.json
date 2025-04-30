@@ -4,7 +4,8 @@
 	"description": "",
 	"main": "index.js",
 	"scripts": {
-		"dev": "tsx src/server.ts"
+		"dev": "tsx src/server.ts",
+		"migrate:latest": "kysely migrate:latest"
 	},
 	"repository": {
 		"type": "git",
