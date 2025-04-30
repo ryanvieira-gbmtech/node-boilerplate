@@ -3,11 +3,7 @@ import type { NewUsers, UsersId } from "@/lib/database/schema/public/Users";
 
 export class UserRepository {
 	async create(user: NewUsers) {
-		const newUser = await db
-			.insertInto("users")
-			.values(user)
-			.returningAll()
-			.executeTakeFirstOrThrow();
+		const newUser = await db.insertInto("users").values(user).returningAll().executeTakeFirstOrThrow();
 
 		return newUser;
 	}
@@ -23,11 +19,7 @@ export class UserRepository {
 	}
 
 	async findByEmail(email: string) {
-		const user = await db
-			.selectFrom("users")
-			.where("email", "=", email)
-			.selectAll()
-			.executeTakeFirst();
+		const user = await db.selectFrom("users").where("email", "=", email).selectAll().executeTakeFirst();
 
 		return user;
 	}

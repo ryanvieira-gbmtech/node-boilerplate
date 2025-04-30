@@ -8,7 +8,8 @@
 		"migrate:latest": "kysely migrate:latest",
 		"kanel": "kanel && biome check --write",
 		"test:unit": "jest --runInBand --config test/jest.unit.config.ts",
-		"test:e2e": "jest --runInBand --config test/jest.e2e.config.ts"
+		"test:e2e": "jest --runInBand --config test/jest.e2e.config.ts",
+		"lint": "biome check --write"
 	},
 	"repository": {
 		"type": "git",

@@ -3,10 +3,7 @@ import { makeCreateUserUseCase } from "@/use-cases/factories/make-create-user-us
 import type { FastifyReply, FastifyRequest } from "fastify";
 import type { CreateUserRequest } from "../dto/request";
 
-export async function createUser(
-	request: FastifyRequest<{ Body: CreateUserRequest }>,
-	reply: FastifyReply,
-) {
+export async function createUser(request: FastifyRequest<{ Body: CreateUserRequest }>, reply: FastifyReply) {
 	const { email, name, password } = request.body;
 
 	try {

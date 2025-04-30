@@ -3,10 +3,7 @@ import { makeAuthenticateUseCase } from "@/use-cases/factories/make-authenticate
 import type { FastifyReply, FastifyRequest } from "fastify";
 import type { SignInRequest } from "../dto/request";
 
-export async function signIn(
-	request: FastifyRequest<{ Body: SignInRequest }>,
-	reply: FastifyReply,
-) {
+export async function signIn(request: FastifyRequest<{ Body: SignInRequest }>, reply: FastifyReply) {
 	const { email, password } = request.body;
 
 	try {
