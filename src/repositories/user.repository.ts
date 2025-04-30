@@ -1,5 +1,5 @@
 import { db } from "@/lib/database/kysely";
-import type { NewUsers } from "@/lib/database/schema/public/Users";
+import type { NewUsers, UsersId } from "@/lib/database/schema/public/Users";
 
 export class UserRepository {
 	async create(user: NewUsers) {
@@ -10,6 +10,16 @@ export class UserRepository {
 			.executeTakeFirstOrThrow();
 
 		return newUser;
+	}
+
+	async findById(id: number) {
+		const user = await db
+			.selectFrom("users")
+			.where("id", "=", id as UsersId)
+			.selectAll()
+			.executeTakeFirst();
+
+		return user;
 	}
 
 	async findByEmail(email: string) {
