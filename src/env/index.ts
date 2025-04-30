@@ -4,9 +4,12 @@ import { Type } from "@sinclair/typebox";
 import { Value } from "@sinclair/typebox/value";
 
 const EnvSchema = Type.Object({
-	NODE_ENV: Type.Union([Type.Literal("development"), Type.Literal("production")], {
-		default: "development",
-	}),
+	NODE_ENV: Type.Union(
+		[Type.Literal("development"), Type.Literal("production"), Type.Literal("test")],
+		{
+			default: "development",
+		},
+	),
 	DATABASE_URL: Type.String({ pattern: "^postgres://.*" }),
 	TZ: Type.String({ default: "UTC" }),
 	PORT: Type.Number({ default: 3000 }),
