@@ -9,7 +9,7 @@ const config: JestConfigWithTsJest = {
 	passWithNoTests: true,
 	collectCoverage: false,
 	testEnvironment: "node",
-	testMatch: ["<rootDir>/src/**/test/unit/*.spec.ts"],
+	testMatch: ["<rootDir>/src/**/__test__/unit/*.spec.ts"],
 	moduleNameMapper: {
 		"^@/(.*)$": "<rootDir>/src/$1",
 	},
