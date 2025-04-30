@@ -9,8 +9,8 @@ services:
       - node-boilerplate
     container_name: node-boilerplate-postgresql
     environment:
-      - POSTGRESQL_USERNAME=docker
-      - POSTGRESQL_PASSWORD=docker
+      - POSTGRESQL_USERNAME=postgres
+      - POSTGRESQL_PASSWORD=postgres
       - POSTGRESQL_DATABASE=node-boilerplate
     ports:
       - '5432:5432'
