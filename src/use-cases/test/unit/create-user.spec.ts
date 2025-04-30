@@ -1,4 +1,5 @@
 import { CreateUserUseCase } from "@/use-cases/create-user";
+import { UserAlreadyExistsError } from "@/use-cases/errors/user-already-exists-error";
 import { mockUserRepository } from "@/utils/test";
 
 let sut: CreateUserUseCase;
@@ -26,5 +27,15 @@ describe("CreateUser UseCase", () => {
 				password: expect.any(String),
 			}),
 		);
+	});
+
+	it("should not be able to create a user with an existing email", async () => {
+		mockUserRepository.findByEmail.mockResolvedValueOnce({
+			id: "any_id",
+			name: "John Doe",
+			email: "john@doe.com",
+		});
+
+		await expect(sut.execute(mockUser)).rejects.toThrow(UserAlreadyExistsError);
 	});
 });
