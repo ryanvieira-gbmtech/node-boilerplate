@@ -6,13 +6,13 @@ import { Pool } from "pg";
 import { db as kyselyInstance } from "../../src/lib/database/kysely";
 
 export async function deleteSchema(schema: string) {
-	await sql.raw(`DROP SCHEMA IF EXISTS ${schema} CASCADE`).execute(kyselyInstance);
+	await sql.raw(`DROP SCHEMA IF EXISTS "${schema}" CASCADE`).execute(kyselyInstance);
 	await kyselyInstance.destroy();
 }
 
 export async function changeDatabaseURL(schema: string) {
 	if (!process.env.DATABASE_URL) {
-		throw new Error("DATABASE_URL is not defined");
+		throw new Error("DATABASE_URL is not set");
 	}
 
 	const url = new URL(process.env.DATABASE_URL);
