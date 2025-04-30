@@ -10,6 +10,7 @@
 		"skipLibCheck": true,
 		"sourceMap": true,
 		"outDir": "./dist",
+		"types": ["node", "jest", "@types/jest"],
 		"paths": {
 			"@/*": ["./src/*"]
 		}
