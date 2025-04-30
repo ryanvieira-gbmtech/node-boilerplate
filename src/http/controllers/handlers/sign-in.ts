@@ -1,7 +1,7 @@
 import { InvalidCredentialsError } from "@/use-cases/errors/invalid-credentials-error";
 import { makeAuthenticateUseCase } from "@/use-cases/factories/make-authenticate-use-case";
 import type { FastifyReply, FastifyRequest } from "fastify";
-import type { SignInRequest } from "./dto/request";
+import type { SignInRequest } from "../dto/request";
 
 export async function signIn(
 	request: FastifyRequest<{ Body: SignInRequest }>,

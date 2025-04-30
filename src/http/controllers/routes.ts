@@ -1,8 +1,8 @@
 import type { FastifyInstance } from "fastify";
-import { createUser } from "./create-user";
 import { CreateUserRequest, SignInRequest } from "./dto/request";
 import { CreateUserResponse, SignInResponse } from "./dto/response";
-import { signIn } from "./sign-in";
+import { createUser } from "./handlers/create-user";
+import { signIn } from "./handlers/sign-in";
 
 export async function routes(app: FastifyInstance) {
 	app.post(

@@ -1,7 +1,7 @@
 import { UserAlreadyExistsError } from "@/use-cases/errors/user-already-exists-error";
 import { makeCreateUserUseCase } from "@/use-cases/factories/make-create-user-use-case";
 import type { FastifyReply, FastifyRequest } from "fastify";
-import type { CreateUserRequest } from "./dto/request";
+import type { CreateUserRequest } from "../dto/request";
 
 export async function createUser(
 	request: FastifyRequest<{ Body: CreateUserRequest }>,
