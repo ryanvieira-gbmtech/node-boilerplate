@@ -1,8 +1,8 @@
 import { type Static, Type } from "@sinclair/typebox";
 
-export const SignInBodyRequest = Type.Object({
+export const SignInRequest = Type.Object({
 	email: Type.String(),
 	password: Type.String(),
 });
 
-export type SignInBodyRequest = Static<typeof SignInBodyRequest>;
+export type SignInRequest = Static<typeof SignInRequest>;
