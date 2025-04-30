@@ -7,7 +7,8 @@
 		"dev": "tsx watch src/server.ts",
 		"migrate:latest": "kysely migrate:latest",
 		"kanel": "kanel && biome check --write",
-		"test:unit": "jest --runInBand --config test/jest.unit.config.ts"
+		"test:unit": "jest --runInBand --config test/jest.unit.config.ts",
+		"test:e2e": "jest --runInBand --config test/jest.e2e.config.ts"
 	},
 	"repository": {
 		"type": "git",
@@ -33,6 +34,7 @@
 		"kanel-kysely": "0.7.1",
 		"kysely-ctl": "0.12.2",
 		"lefthook": "1.11.12",
+		"supertest": "7.1.0",
 		"ts-jest": "29.3.2",
 		"tsx": "4.19.4",
 		"typescript": "5.8.3"
