@@ -1,16 +1,16 @@
-networks: 
-  node-boilerplate:
+networks:
+  boilerplate-network:
     driver: bridge
 
 services:
-  postgresql:
-    image: 'bitnami/postgresql:latest'
+  db:
+    image: "postgres"
     networks:
-      - node-boilerplate
+      - boilerplate-network
     container_name: node-boilerplate-postgresql
     environment:
-      - POSTGRESQL_USERNAME=postgres
-      - POSTGRESQL_PASSWORD=postgres
-      - POSTGRESQL_DATABASE=node-boilerplate
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=localhost
     ports:
-      - '5432:5432'
+      - "5432:5432"
