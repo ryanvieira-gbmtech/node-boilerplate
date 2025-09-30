@@ -1,7 +1,7 @@
 import type { FastifyReply, FastifyRequest } from "fastify";
 import { getUserProfileUseCase } from "@/use-cases/get-user-profile";
 
-export async function getUserProfile(request: FastifyRequest, reply: FastifyReply) {
+export async function getUserProfileHandler(request: FastifyRequest, reply: FastifyReply) {
 	const { user } = await getUserProfileUseCase({
 		id: Number(request.user.sub),
 	});

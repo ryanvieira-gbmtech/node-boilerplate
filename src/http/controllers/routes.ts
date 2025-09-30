@@ -2,9 +2,9 @@ import type { FastifyInstance } from "fastify";
 import { verifyJwt } from "../middleware/verify-jwt";
 import { CreateUserRequest, SignInRequest } from "./dto/request";
 import { CreateUserResponse, SignInResponse } from "./dto/response";
-import { createUser } from "./handlers/create-user";
-import { signIn } from "./handlers/sign-in";
-import { getUserProfile } from "./handlers/user-profile";
+import { createUserHandler } from "./handlers/create-user";
+import { signInHandler } from "./handlers/sign-in";
+import { getUserProfileHandler } from "./handlers/user-profile";
 
 export async function routes(app: FastifyInstance) {
 	app.post(
@@ -18,10 +18,10 @@ export async function routes(app: FastifyInstance) {
 				},
 			},
 		},
-		signIn,
+		signInHandler,
 	);
 
-	app.post(
+	app.post<{ Body: CreateUserRequest }>(
 		"/users",
 		{
 			schema: {
@@ -32,8 +32,8 @@ export async function routes(app: FastifyInstance) {
 				},
 			},
 		},
-		createUser,
+		createUserHandler,
 	);
 
-	app.get("/me", { onRequest: [verifyJwt] }, getUserProfile);
+	app.get("/me", { onRequest: [verifyJwt] }, getUserProfileHandler);
 }

@@ -3,7 +3,7 @@ import { authenticateUseCase } from "@/use-cases/authenticate";
 import { InvalidCredentialsError } from "@/use-cases/errors/invalid-credentials-error";
 import type { SignInRequest } from "../dto/request";
 
-export async function signIn(request: FastifyRequest<{ Body: SignInRequest }>, reply: FastifyReply) {
+export async function signInHandler(request: FastifyRequest<{ Body: SignInRequest }>, reply: FastifyReply) {
 	const { email, password } = request.body;
 
 	try {

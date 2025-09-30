@@ -3,7 +3,7 @@ import { createUserUseCase } from "@/use-cases/create-user";
 import { UserAlreadyExistsError } from "@/use-cases/errors/user-already-exists-error";
 import type { CreateUserRequest } from "../dto/request";
 
-export async function createUser(request: FastifyRequest<{ Body: CreateUserRequest }>, reply: FastifyReply) {
+export async function createUserHandler(request: FastifyRequest<{ Body: CreateUserRequest }>, reply: FastifyReply) {
 	const { email, name, password } = request.body;
 
 	try {
