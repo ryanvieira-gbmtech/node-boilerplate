@@ -7,3 +7,4 @@ pre-commit:
     test:
       glob: "*.{js,ts,cjs,mjs,d.cts,d.mts,jsx,tsx,json,jsonc}"
       run: npm run test:unit
+      stage_fixed: false
