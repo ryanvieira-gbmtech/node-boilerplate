@@ -1,5 +1,5 @@
 import bcryptjs from "bcryptjs";
-import type { Users } from "@/lib/database/schema/public/Users";
+import type { Users } from "@/database/schema/public/Users";
 import { create, findByEmail } from "@/repositories/user.repository";
 import { UserAlreadyExistsError } from "./errors/user-already-exists-error";
 
