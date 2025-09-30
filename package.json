@@ -9,8 +9,8 @@
 		"kanel": "kanel && biome check --write",
 		"build": "tsc",
 		"start": "node dist/server.js",
-		"test:unit": "jest --runInBand --config test/jest.unit.config.ts",
-		"test:e2e": "jest --runInBand --config test/jest.e2e.config.ts",
+		"test:unit": "jest --config test/jest.unit.config.ts",
+		"test:e2e": "jest --config test/jest.e2e.config.ts",
 		"lint": "biome check --write"
 	},
 	"repository": {
