@@ -6,6 +6,8 @@ const config: JestConfigWithTsJest = {
 	coverageProvider: "v8",
 	roots: ["<rootDir>/src"],
 	verbose: true,
+	maxWorkers: 4,
+	noStackTrace: true,
 	passWithNoTests: true,
 	collectCoverage: false,
 	testEnvironment: "node",
