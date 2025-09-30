@@ -1,7 +1,7 @@
-import { env } from "@/env";
 import fastifyCookie from "@fastify/cookie";
 import fastifyJwt from "@fastify/jwt";
 import type { FastifyInstance } from "fastify";
+import { env } from "@/env";
 
 export async function registerAuthPlugins(app: FastifyInstance) {
 	// Register JWT authentication

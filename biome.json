@@ -37,7 +37,7 @@
 	},
 	"overrides": [
 		{
-			"includes": ["src/lib/database/migrations/**/*.ts"],
+			"includes": ["src/database/migrations/**/*.ts"],
 			"linter": {
 				"rules": {
 					"suspicious": {
