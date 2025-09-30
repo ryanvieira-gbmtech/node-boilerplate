@@ -1,5 +1,5 @@
 import bcryptjs from "bcryptjs";
-import type { Users } from "@/lib/database/schema/public/Users";
+import type { Users } from "@/database/schema/public/Users";
 import { findByEmail } from "@/repositories/user.repository";
 import { InvalidCredentialsError } from "./errors/invalid-credentials-error";
 import { ResourceNotFoundError } from "./errors/resource-not-found-error";

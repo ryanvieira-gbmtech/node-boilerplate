@@ -1,4 +1,4 @@
-import type { Users } from "@/lib/database/schema/public/Users";
+import type { Users } from "@/database/schema/public/Users";
 import { findById } from "@/repositories/user.repository";
 import { ResourceNotFoundError } from "./errors/resource-not-found-error";
 

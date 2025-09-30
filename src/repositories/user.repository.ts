@@ -1,5 +1,5 @@
-import { db } from "@/lib/database/kysely";
-import type { NewUsers, UsersId } from "@/lib/database/schema/public/Users";
+import { db } from "@/database/kysely";
+import type { NewUsers, UsersId } from "@/database/schema/public/Users";
 
 export async function create(user: NewUsers) {
 	const newUser = await db.insertInto("users").values(user).returningAll().executeTakeFirstOrThrow();
