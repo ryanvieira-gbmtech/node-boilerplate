@@ -1,4 +1,7 @@
-import "dotenv/config";
+import dotenv from "dotenv";
+import dotenvExpand from "dotenv-expand";
+
+dotenvExpand.expand(dotenv.config());
 
 import { defineConfig, getKnexTimestampPrefix } from "kysely-ctl";
 import { Pool } from "pg";
