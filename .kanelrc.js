@@ -12,6 +12,6 @@ module.exports = {
 	schemas: ["public"],
 	typeFilter: kyselyTypeFilter,
 	preDeleteOutputFolder: true,
-	outputPath: "./src/lib/database/schema",
+	outputPath: "./src/database/schema",
 	preRenderHooks: [makeKyselyHook(), kyselyCamelCaseHook],
 };

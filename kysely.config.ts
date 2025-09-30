@@ -12,12 +12,12 @@ export default defineConfig({
 		pool: new Pool({ connectionString: process.env.DATABASE_URL }),
 	},
 	migrations: {
-		migrationFolder: "src/lib/database/migrations",
+		migrationFolder: "src/database/migrations",
 		getMigrationPrefix: getKnexTimestampPrefix,
 		migrationTableSchema: "public",
 	},
 	seeds: {
-		seedFolder: "src/lib/database/seeds",
+		seedFolder: "src/database/seeds",
 		getSeedPrefix: getKnexTimestampPrefix,
 	},
 });
