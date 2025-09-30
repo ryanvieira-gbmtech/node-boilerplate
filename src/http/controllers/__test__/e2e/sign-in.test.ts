@@ -1,5 +1,5 @@
-import { app } from "@/app";
 import request from "supertest";
+import { app } from "@/app";
 
 describe("Sign In (E2E)", () => {
 	beforeAll(async () => {
