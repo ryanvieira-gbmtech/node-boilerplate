@@ -13,4 +13,12 @@ const EnvSchema = Type.Object({
 	JWT_SECRET: Type.String(),
 });
 
+if (!Value.Check(EnvSchema, process.env)) {
+	const errors = Value.Errors(EnvSchema, process.env);
+
+	console.error(errors.First());
+
+	throw new Error(`Invalid environment variables: ${errors.First()}`);
+}
+
 export const env = Value.Parse(EnvSchema, process.env);
