@@ -3,7 +3,7 @@ import { Pool } from "pg";
 import { env } from "@/env";
 import type Database from "./schema/Database";
 
-const dialect = new PostgresDialect({
+export const dialect = new PostgresDialect({
 	pool: new Pool({
 		connectionString: env.DATABASE_URL,
 	}),

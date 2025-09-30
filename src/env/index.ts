@@ -10,16 +10,18 @@ const EnvSchema = Type.Object({
 	NODE_ENV: Type.Union([Type.Literal("development"), Type.Literal("production"), Type.Literal("test")], {
 		default: "development",
 	}),
-	SENTRY_DSN: Type.String({ format: "uri" }),
+	SENTRY_DSN: Type.Optional(Type.String()),
 	DATABASE_USER: Type.String(),
 	DATABASE_PASSWORD: Type.String(),
 	DATABASE_NAME: Type.String(),
 	DATABASE_HOST: Type.String(),
-	DATABASE_PORT: Type.Number({ default: 5432 }),
+	DATABASE_PORT: Type.String({ default: "5432" }),
 	DATABASE_URL: Type.String({ pattern: "^postgres://.*" }),
 	TZ: Type.String({ default: "UTC" }),
-	PORT: Type.Number({ default: 3000 }),
+	PORT: Type.String({ default: "3000" }),
 	JWT_SECRET: Type.String(),
+	BETTER_AUTH_SECRET: Type.String(),
+	BETTER_AUTH_URL: Type.String(),
 });
 
 if (!Value.Check(EnvSchema, process.env)) {
