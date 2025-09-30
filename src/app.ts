@@ -1,3 +1,5 @@
+import "./lib/sentry";
+
 import type { TypeBoxTypeProvider } from "@fastify/type-provider-typebox";
 import fastify from "fastify";
 import { routes } from "./http/controllers/routes";

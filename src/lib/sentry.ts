@@ -1,8 +1,9 @@
 import * as Sentry from "@sentry/node";
 import { nodeProfilingIntegration } from "@sentry/profiling-node";
+import { env } from "@/env";
 
 Sentry.init({
-	dsn: "", // Sentry DSN
+	dsn: env.SENTRY_DSN, // Sentry DSN
 	sendDefaultPii: true,
 	integrations: [
 		nodeProfilingIntegration(),

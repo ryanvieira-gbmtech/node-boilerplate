@@ -10,6 +10,7 @@ const EnvSchema = Type.Object({
 	NODE_ENV: Type.Union([Type.Literal("development"), Type.Literal("production"), Type.Literal("test")], {
 		default: "development",
 	}),
+	SENTRY_DSN: Type.String({ format: "uri" }),
 	DATABASE_USER: Type.String(),
 	DATABASE_PASSWORD: Type.String(),
 	DATABASE_NAME: Type.String(),
