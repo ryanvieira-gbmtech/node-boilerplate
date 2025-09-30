@@ -1,8 +1,14 @@
-import { CreateUserUseCase } from "@/use-cases/create-user";
+import { createUserUseCase } from "@/use-cases/create-user";
 import { UserAlreadyExistsError } from "@/use-cases/errors/user-already-exists-error";
-import { mockUserRepository } from "@/utils/test";
 
-let sut: CreateUserUseCase;
+// Mock the repository functions
+jest.mock("@/repositories/user.repository", () => ({
+	create: jest.fn(),
+	findByEmail: jest.fn(),
+}));
+
+const mockCreate = require("@/repositories/user.repository").create;
+const mockFindByEmail = require("@/repositories/user.repository").findByEmail;
 
 const mockUser = {
 	name: "John Doe",
@@ -12,16 +18,17 @@ const mockUser = {
 
 describe("CreateUser UseCase", () => {
 	beforeEach(() => {
-		sut = new CreateUserUseCase(mockUserRepository);
-
 		jest.resetAllMocks();
 	});
 
 	it("should be able to create a user", async () => {
-		await sut.execute(mockUser);
+		mockFindByEmail.mockResolvedValueOnce(null);
+		mockCreate.mockResolvedValueOnce(mockUser);
 
-		expect(mockUserRepository.create).toHaveBeenCalledTimes(1);
-		expect(mockUserRepository.create).toHaveBeenCalledWith(
+		await createUserUseCase(mockUser);
+
+		expect(mockCreate).toHaveBeenCalledTimes(1);
+		expect(mockCreate).toHaveBeenCalledWith(
 			expect.objectContaining({
 				...mockUser,
 				password: expect.any(String),
@@ -30,12 +37,12 @@ describe("CreateUser UseCase", () => {
 	});
 
 	it("should not be able to create a user with an existing email", async () => {
-		mockUserRepository.findByEmail.mockResolvedValueOnce({
+		mockFindByEmail.mockResolvedValueOnce({
 			id: "any_id",
 			name: "John Doe",
 			email: "john@doe.com",
 		});
 
-		await expect(sut.execute(mockUser)).rejects.toThrow(UserAlreadyExistsError);
+		await expect(createUserUseCase(mockUser)).rejects.toThrow(UserAlreadyExistsError);
 	});
 });

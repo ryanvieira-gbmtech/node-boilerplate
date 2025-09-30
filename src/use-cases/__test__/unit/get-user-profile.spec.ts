@@ -1,8 +1,12 @@
 import { ResourceNotFoundError } from "@/use-cases/errors/resource-not-found-error";
-import { GetUserProfileUseCase } from "@/use-cases/get-user-profile";
-import { mockUserRepository } from "@/utils/test";
+import { getUserProfileUseCase } from "@/use-cases/get-user-profile";
 
-let sut: GetUserProfileUseCase;
+// Mock the repository functions
+jest.mock("@/repositories/user.repository", () => ({
+	findById: jest.fn(),
+}));
+
+const mockFindById = require("@/repositories/user.repository").findById;
 
 const mockUser = {
 	name: "John Doe",
@@ -12,21 +16,19 @@ const mockUser = {
 
 describe("GetUserProfile UseCase", () => {
 	beforeEach(() => {
-		sut = new GetUserProfileUseCase(mockUserRepository);
-
 		jest.resetAllMocks();
 	});
 
 	it("should be able to get a user profile", async () => {
-		mockUserRepository.findById.mockResolvedValueOnce(mockUser);
-		const result = await sut.execute({ id: 1 });
+		mockFindById.mockResolvedValueOnce(mockUser);
+		const result = await getUserProfileUseCase({ id: 1 });
 
 		expect(result.user).toEqual(mockUser);
 	});
 
 	it("should throw an error if user does not exist", async () => {
-		mockUserRepository.findById.mockResolvedValueOnce(null);
+		mockFindById.mockResolvedValueOnce(null);
 
-		await expect(sut.execute({ id: 1 })).rejects.toThrow(ResourceNotFoundError);
+		await expect(getUserProfileUseCase({ id: 1 })).rejects.toThrow(ResourceNotFoundError);
 	});
 });

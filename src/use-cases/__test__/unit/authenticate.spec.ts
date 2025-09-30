@@ -1,15 +1,19 @@
-import { AuthenticateUseCase } from "@/use-cases/authenticate";
+import bcryptjs from "bcryptjs";
+import { authenticateUseCase } from "@/use-cases/authenticate";
 import { InvalidCredentialsError } from "@/use-cases/errors/invalid-credentials-error";
 import { ResourceNotFoundError } from "@/use-cases/errors/resource-not-found-error";
-import { mockUserRepository } from "@/utils/test";
-import bcryptjs from "bcryptjs";
+
+// Mock the repository functions
+jest.mock("@/repositories/user.repository", () => ({
+	findByEmail: jest.fn(),
+}));
 
 // Mock bcryptjs
 jest.mock("bcryptjs", () => ({
 	compare: jest.fn(),
 }));
 
-let sut: AuthenticateUseCase;
+const mockFindByEmail = require("@/repositories/user.repository").findByEmail;
 
 const mockUser = {
 	name: "John Doe",
@@ -19,15 +23,14 @@ const mockUser = {
 
 describe("Authenticate UseCase", () => {
 	beforeEach(() => {
-		sut = new AuthenticateUseCase(mockUserRepository);
 		jest.resetAllMocks();
 	});
 
 	it("should be able to authenticate a user", async () => {
-		mockUserRepository.findByEmail.mockResolvedValueOnce(mockUser);
+		mockFindByEmail.mockResolvedValueOnce(mockUser);
 		(bcryptjs.compare as jest.Mock).mockResolvedValueOnce(true);
 
-		const result = await sut.execute({
+		const result = await authenticateUseCase({
 			email: "john@doe.com",
 			password: "123456",
 		});
@@ -37,10 +40,10 @@ describe("Authenticate UseCase", () => {
 	});
 
 	it("should throw ResourceNotFoundError if user does not exist", async () => {
-		mockUserRepository.findByEmail.mockResolvedValueOnce(null);
+		mockFindByEmail.mockResolvedValueOnce(null);
 
 		await expect(
-			sut.execute({
+			authenticateUseCase({
 				email: "nonexistent@user.com",
 				password: "123456",
 			}),
@@ -48,11 +51,11 @@ describe("Authenticate UseCase", () => {
 	});
 
 	it("should throw InvalidCredentialsError if password is incorrect", async () => {
-		mockUserRepository.findByEmail.mockResolvedValueOnce(mockUser);
+		mockFindByEmail.mockResolvedValueOnce(mockUser);
 		(bcryptjs.compare as jest.Mock).mockResolvedValueOnce(false);
 
 		await expect(
-			sut.execute({
+			authenticateUseCase({
 				email: "john@doe.com",
 				password: "wrong_password",
 			}),

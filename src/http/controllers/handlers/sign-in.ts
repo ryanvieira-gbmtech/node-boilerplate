@@ -1,15 +1,13 @@
-import { InvalidCredentialsError } from "@/use-cases/errors/invalid-credentials-error";
-import { makeAuthenticateUseCase } from "@/use-cases/factories/make-authenticate-use-case";
 import type { FastifyReply, FastifyRequest } from "fastify";
+import { authenticateUseCase } from "@/use-cases/authenticate";
+import { InvalidCredentialsError } from "@/use-cases/errors/invalid-credentials-error";
 import type { SignInRequest } from "../dto/request";
 
 export async function signIn(request: FastifyRequest<{ Body: SignInRequest }>, reply: FastifyReply) {
 	const { email, password } = request.body;
 
 	try {
-		const authenticaseUse = makeAuthenticateUseCase();
-
-		const { user } = await authenticaseUse.execute({
+		const { user } = await authenticateUseCase({
 			email,
 			password,
 		});

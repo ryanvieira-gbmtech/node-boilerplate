@@ -1,6 +1,6 @@
-import type { Users } from "@/lib/database/schema/public/Users";
-import type { UserRepository } from "@/repositories/user.repository";
 import bcryptjs from "bcryptjs";
+import type { Users } from "@/lib/database/schema/public/Users";
+import { create, findByEmail } from "@/repositories/user.repository";
 import { UserAlreadyExistsError } from "./errors/user-already-exists-error";
 
 interface CreateUserUseCaseRequest {
@@ -13,29 +13,25 @@ interface CreateUserUseCaseResponse {
 	user: Omit<Users, "password">;
 }
 
-export class CreateUserUseCase {
-	constructor(private userRepository: UserRepository) {}
+export async function createUserUseCase(filter: CreateUserUseCaseRequest): Promise<CreateUserUseCaseResponse> {
+	const { name, email, password } = filter;
 
-	async execute(filter: CreateUserUseCaseRequest): Promise<CreateUserUseCaseResponse> {
-		const { name, email, password } = filter;
+	const userExists = await findByEmail(email);
 
-		const userExists = await this.userRepository.findByEmail(email);
-
-		if (userExists) {
-			throw new UserAlreadyExistsError();
-		}
-
-		const salt = await bcryptjs.genSalt(10);
-		const newPassword = await bcryptjs.hash(password, salt);
-
-		const user = await this.userRepository.create({
-			name,
-			email,
-			password: newPassword,
-		});
-
-		return {
-			user,
-		};
+	if (userExists) {
+		throw new UserAlreadyExistsError();
 	}
+
+	const salt = await bcryptjs.genSalt(10);
+	const newPassword = await bcryptjs.hash(password, salt);
+
+	const user = await create({
+		name,
+		email,
+		password: newPassword,
+	});
+
+	return {
+		user,
+	};
 }
